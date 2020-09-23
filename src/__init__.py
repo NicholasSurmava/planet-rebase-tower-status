@@ -1,8 +1,4 @@
 from flask import Flask, render_template
-import os
-
-# TODO: Below is temp
-from waitress import serve
 
 app = Flask(__name__)
 
@@ -12,6 +8,3 @@ def index():
 
     return render_template('index.html', title=title)
     
-if __name__ == '__main__':
-    # serve(app, os.environ['PORT'])
-    serve(app, host='0.0.0.0', port=os.getenv('PORT', 5000))
