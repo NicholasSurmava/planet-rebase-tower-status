@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planet Rebase LLC - Tower Status</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>{{ title }}</h1>
-    <form action="">
-        <label for="site">Site #:</label>
-        <input type="text" name=site>
-        <button type="submit">Search</button>
-    </form>
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <form action="">
+            <label for="site">Site #:</label>
+            <input type="text" name=site>
+            <button type="submit">Search</button>
+        </form>
+    </div>
 </body>
 </html>
