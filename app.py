@@ -13,4 +13,5 @@ def index():
     return render_template('index.html', title=title)
     
 if __name__ == '__main__':
-    serve(app, os.environ['PORT'])
+    # serve(app, os.environ['PORT'])
+    serve(app, host='0.0.0.0', port=os.getenv('PORT', 5000))
