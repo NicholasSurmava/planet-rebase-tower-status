@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planet Rebase LLC - Tower Status</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>{{ title }}</h1>
-        </header>
-        <main>
-            <form action="">
-                <label for="site">Site #:</label>
-                <input type="text" name=site>
-                <button type="submit">Search</button>
-            </form>
-        </main>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Planet Rebase LLC - Tower Status{% endblock %}
+{% block content %}
+<div class="container">
+    <header>
+        <h1>{{ title }}</h1>
+    </header>
+    <main>
+        <form action="/" method="post">
+            <label for="site">Site #:</label>
+            <input type="text" name=site>
+            <button type="submit">Search</button>
+        </form>
+    </main>
+</div>
+{% endblock %}
