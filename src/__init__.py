@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os, json, time
+import requests
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', "super-secret-dev-key")
 
 warehouse_data = 'data_warehouse.json'
-weather_data = ' '
+weather_data = 'https://api.met.no/weatherapi/locationforecast/2.0/compact.json?'
 
 def search_site(site_id='all'):
     if site_id == 'all':
@@ -22,9 +23,16 @@ def search_site(site_id='all'):
                     if v == site_id:
                         return s
 
-def get_weather(site_id='all'):
-    time.sleep(3)
-    return 'hot'
+def get_weather(lat, long, delay=0):
+    if delay > 0:
+        print(f"Weather Request delayed by: {delay} seconds")
+
+    r = requests.get(weather_data + f"lat={lat}&lon={long}")
+    if r.status_code == 200:
+        time.sleep(delay)
+        return r.json()
+    else:
+        return None
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -46,7 +54,10 @@ def site_status(site):
         user = session["user"]
 
         site = search_site(site)
-        weather = get_weather()
+        lat = site["location"]["lat"]
+        long = site["location"]["long"]
+
+        weather = get_weather(lat, long, delay=2)
 
         if site != None:
             return render_template('site.html', user=user, site=site, weather=weather)

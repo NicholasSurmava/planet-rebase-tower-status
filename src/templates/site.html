@@ -9,7 +9,8 @@
 {% block content %}
     <div class="container">
         <li>Hello! {{ user }}</li>
-        <p>Weather = {{ weather }}</p>
+        <p>Weather Time: {{ weather["properties"]["timeseries"][0]["time"] }}</p>
+        <p>Weather Temp: {{ weather["properties"]["timeseries"][0]["data"]["instant"]["details"]["air_temperature"] }}C</p>
         <div id="mapid"></div>
         <div>
             <h1>{{ site["site_id"] }}</h1>
