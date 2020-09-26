@@ -1,0 +1,11 @@
+{% include 'nav.html' %}
+
+{% if user %}
+<ul>
+    <li><button>{{ user }}</button></li>
+</ul>
+{% else %}
+<ul>
+    <li><a href="{{ url_for('login') }}">Login</a></li>
+</ul>
+{% endif %}
