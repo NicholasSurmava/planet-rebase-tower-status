@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block title %}Planet Rebase LLC - Tower Status - {{ site }}{% endblock %}
 {% block styles %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -8,7 +9,6 @@
 
 {% block content %}
     <div class="container">
-        <li>Hello! {{ user }}</li>
         <p>Weather Time: {{ weather["properties"]["timeseries"][0]["time"] }}</p>
         <p>Weather Temp: {{ weather["properties"]["timeseries"][0]["data"]["instant"]["details"]["air_temperature"] }}C</p>
         <div id="mapid"></div>
