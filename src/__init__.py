@@ -57,7 +57,7 @@ def site_status(site):
         lat = site["location"]["lat"]
         long = site["location"]["long"]
 
-        weather = get_weather(lat, long, delay=2)
+        weather = get_weather(lat, long)
 
         if site != None:
             return render_template('site.html', user=user, site=site, weather=weather)
