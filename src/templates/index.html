@@ -5,10 +5,9 @@
     {% if user %}
     <header>
         <h1>Tower Status Checker</h1>
-        <h2>Hello! {{ user }}</h2>
     </header>
     <main>
-        <form action="/" method="post">
+        <form action="/" method="post" target="_blank">
             <label for="site">Site #:</label>
             <input type="text" name=site>
             <button type="submit">Search</button>
