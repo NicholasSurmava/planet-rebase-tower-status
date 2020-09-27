@@ -38,6 +38,7 @@ def get_weather(lat, long, delay=0):
 def index():
     if request.method == "POST":
         site = request.form['site']
+        
         return redirect(url_for("site_status", site=site))
 
     if "user" in session:
@@ -48,12 +49,15 @@ def index():
     return render_template('index.html')
     
 
-@app.route('/<site>')
-def site_status(site):
+@app.route('/site_report')
+def site_status():
     if "user" in session:
         user = session["user"]
 
-        site = search_site(site)
+        args = request.args
+
+        site = search_site(args['site'])
+        
         lat = site["location"]["lat"]
         long = site["location"]["long"]
 
