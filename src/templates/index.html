@@ -1,23 +1,35 @@
-{% extends "base.html" %}
-{% block title %}Planet Rebase LLC - Tower Status{% endblock %}
-{% block content %}
-<div class="container">
-    {% if user %}
-    <header>
-        <h1>Tower Status Checker</h1>
-    </header>
-    <main>
+{% extends "base.html" %} {% block title %}Planet Rebase LLC - Tower Status{%
+endblock %} {% block content %}
+<section class="hero is-link is-fullheight-with-navbar is-info is-medium">
+  <div class="hero-body has-text-centered">
+    <div class="container">
+      {% if user %}
+      <header>
+        <h1 class="title">Tower Status Checker</h1>
+      </header>
+      <main>
         <form action="/" method="post" target="_blank">
-            <label for="site">Site #:</label>
-            <input type="text" name=site>
-            <button type="submit">Search</button>
+          <div class="field">
+            <label class="label">Site id</label>
+            <div class="control">
+              <input
+                name="site"
+                class="input"
+                type="text"
+                placeholder="site id"
+              />
+            </div>
+          </div>
+          <button class="button is-light" type="submit">Search</button>
         </form>
-    </main>
-    {% else %}
-    <header>
+      </main>
+      {% else %}
+      <header>
         <h1>Tower Status Checker</h1>
         <h2>Unkown User. Please <a href="{{ url_for('login') }}">login</a></h2>
-    </header>
-    {% endif %}
-</div>
+      </header>
+      {% endif %}
+    </div>
+  </div>
+</section>
 {% endblock %}

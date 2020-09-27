@@ -1,12 +1,5 @@
 {% extends "base.html" %} {% block title %}Planet Rebase LLC - Tower Status - {{
-site }}{% endblock %} {% block styles %}
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-  crossorigin=""
-/>
-{% endblock %} {% block content %}
+site }}{% endblock %} {% block content %}
 <div class="container">
   <div class="columns is-mobile">
     <div class="column is-one-quarter">
@@ -39,17 +32,6 @@ site }}{% endblock %} {% block styles %}
   </div>
 </div>
 {% block scripts %}
-<script
-  src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-  crossorigin=""
-></script>
-
-<script
-  defer
-  src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"
-></script>
-
 <script>
     var mymap = L.map('mapid').setView([{{ site["location"]["lat"] }}, {{ site["location"]["long"] }}], 13);
 
@@ -84,5 +66,4 @@ site }}{% endblock %} {% block styles %}
 
   circle.on('mouseout', function(){circle.closePopup();});
 </script>
-<script src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %} {% endblock %}
