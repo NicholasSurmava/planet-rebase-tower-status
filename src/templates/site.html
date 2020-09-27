@@ -34,13 +34,40 @@ site }}{% endblock %} {% block styles %}
   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
   crossorigin=""
 ></script>
-<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='js/map.js') }}"></script> -->
 
 <script>
-  var mymap = L.map('mapid').setView([{{ site["location"]["lat"] }}, {{ site["location"]["long"] }}], 13);
+    var mymap = L.map('mapid').setView([{{ site["location"]["lat"] }}, {{ site["location"]["long"] }}], 13);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(mymap);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+
+      var circle = L.circle([{{ site["location"]["lat"] }}, {{ site["location"]["long"] }}], {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0.5,
+          radius: 100
+      }).addTo(mymap).on('click', onClick);
+
+      function onClick(e) {
+        const URL = "/site_report?site={{ site["site_id"] }}"
+        window.open(URL, '_blank');
+  }
+
+  var popup = L.popup();
+
+  // function onMouseover(e) {
+  //   popup
+  //   .setLatLng(e.latlng)
+  //       .setContent("Site id is: {{ site["site_id"] }}")
+  //       .openOn(mymap);
+  // }
+
+  // circle.on('mouseover', onMouseover);
+
+  circle.on('mouseover', function(){circle.bindPopup('Site id: {{ site["site_id"] }}').openPopup();});
+
+  circle.on('mouseout', function(){circle.closePopup();});
 </script>
 {% endblock %} {% endblock %}
