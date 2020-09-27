@@ -22,8 +22,6 @@ def search_site(site_id='all'):
             for s in data:
                 for k, v in s.items():
                     if v == site_id:
-                        # print(v)
-                        # print(site_id)
                         return s
 
 def get_weather(lat, long, delay=0):
