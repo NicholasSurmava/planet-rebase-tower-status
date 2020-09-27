@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', "super-secret-dev-key")
 
 warehouse_data = 'data_warehouse.json'
-weather_data = 'https://api.met.no/weatherapi/locationforecast/2.0/compact.json?'
+weather_data = 'https://api.met.no/weatherapi/locationforecast/2.0/compact.json'
 
 def search_site(site_id='all'):
     if site_id == 'all':
@@ -18,16 +18,19 @@ def search_site(site_id='all'):
 
         with open(warehouse_data) as json_file:
             data = json.load(json_file)
+
             for s in data:
                 for k, v in s.items():
                     if v == site_id:
+                        # print(v)
+                        # print(site_id)
                         return s
 
 def get_weather(lat, long, delay=0):
     if delay > 0:
         print(f"Weather Request delayed by: {delay} seconds")
 
-    r = requests.get(weather_data + f"lat={lat}&lon={long}")
+    r = requests.get(weather_data + f"?lat={lat}&lon={long}")
     if r.status_code == 200:
         time.sleep(delay)
         return r.json()
@@ -57,6 +60,9 @@ def site_status():
         args = request.args
 
         site = search_site(args['site'])
+
+        if type(site) != dict:
+            return '<p>Unknown Site</p>'
         
         lat = site["location"]["lat"]
         long = site["location"]["long"]
@@ -65,8 +71,7 @@ def site_status():
 
         if site != None:
             return render_template('site.html', user=user, site=site, weather=weather)
-        else:
-            return '<p>Unknown Site</p>'
+            
     
     return redirect(url_for("index"))
 
