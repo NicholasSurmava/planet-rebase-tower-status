@@ -81,6 +81,7 @@ def login():
 
         session["user"] = user
 
+        # TODO: After logging in, redirect to the route the user originally requested, ?next=/site_report
         return redirect(url_for("index", user=user))
     
     return render_template('login.html')
