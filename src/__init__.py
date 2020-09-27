@@ -85,3 +85,7 @@ def login():
         return redirect(url_for("index", user=user))
     
     return render_template('login.html')
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    print('logouts')

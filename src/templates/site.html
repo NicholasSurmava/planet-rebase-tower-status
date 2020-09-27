@@ -8,24 +8,34 @@ site }}{% endblock %} {% block styles %}
 />
 {% endblock %} {% block content %}
 <div class="container">
-  <p>Weather Time: {{ weather["properties"]["timeseries"][0]["time"] }}</p>
-  <p>
-    Weather Temp: {{
-    weather["properties"]["timeseries"][0]["data"]["instant"]["details"]["air_temperature"]
-    }}C
-  </p>
-  <div id="mapid"></div>
-  <div>
-    <h1>{{ site["site_id"] }}</h1>
-    <h2>{{ site["site_name"] }}</h2>
-    <h3>Address:</h3>
-    <ul>
-      <li>{{ site["location"]["address"] }}</li>
-      <li>{{ site["location"]["city"] }}</li>
-      <li>{{ site["location"]["state"] }}</li>
-      <li>{{ site["location"]["lat"] }}</li>
-      <li>{{ site["location"]["long"] }}</li>
-    </ul>
+  <div class="columns is-mobile">
+    <div class="column is-one-quarter">
+      <h1 class="title is-1">{{ site["site_id"] }}</h1>
+      <h2 class="subtitle is-1">{{ site["site_name"] }}</h2>
+    </div>
+  </div>
+  <div class="columns is-mobile">
+    <div id="mapid"></div>
+  </div>
+  <div class="columns is-mobile">
+    <div class="column">
+      <h3>Address:</h3>
+      <ul>
+        <li>{{ site["location"]["address"] }}</li>
+        <li>{{ site["location"]["city"] }}</li>
+        <li>{{ site["location"]["state"] }}</li>
+        <li>{{ site["location"]["lat"] }}</li>
+        <li>{{ site["location"]["long"] }}</li>
+      </ul>
+    </div>
+    <div class="column">
+      <p>Weather Time: {{ weather["properties"]["timeseries"][0]["time"] }}</p>
+      <p>
+        Weather Temp: {{
+        weather["properties"]["timeseries"][0]["data"]["instant"]["details"]["air_temperature"]
+        }}C
+      </p>
+    </div>
   </div>
 </div>
 {% block scripts %}
@@ -34,7 +44,11 @@ site }}{% endblock %} {% block styles %}
   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
   crossorigin=""
 ></script>
-<!-- <script src="{{ url_for('static', filename='js/map.js') }}"></script> -->
+
+<script
+  defer
+  src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"
+></script>
 
 <script>
     var mymap = L.map('mapid').setView([{{ site["location"]["lat"] }}, {{ site["location"]["long"] }}], 13);
@@ -70,4 +84,5 @@ site }}{% endblock %} {% block styles %}
 
   circle.on('mouseout', function(){circle.closePopup();});
 </script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %} {% endblock %}
