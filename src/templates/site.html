@@ -3,7 +3,7 @@ site }}{% endblock %} {% block content %}
 <div class="container">
   <div class="columns is-mobile">
     <div class="column is-one-quarter">
-      <h1 class="title is-1">{{ site["site_id"] }}</h1>
+      <h1 class="title is-1" data-js="site_id">{{ site["site_id"] }}</h1>
       <h2 class="subtitle is-1">{{ site["site_name"] }}</h2>
     </div>
   </div>
@@ -28,6 +28,10 @@ site }}{% endblock %} {% block content %}
         weather["properties"]["timeseries"][0]["data"]["instant"]["details"]["air_temperature"]
         }}C
       </p>
+    </div>
+    <div class="column">
+      <button class="button" data-js="get_tickets_btn">Get Tickets</button>
+      <div class="tickets" data-js="ticket_table"></div>
     </div>
   </div>
 </div>
