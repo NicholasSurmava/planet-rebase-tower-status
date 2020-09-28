@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import os, json, time
 import requests
 
@@ -7,6 +7,33 @@ app.secret_key = os.getenv('SECRET_KEY', "super-secret-dev-key")
 
 warehouse_data = 'data_warehouse.json'
 weather_data = 'https://api.met.no/weatherapi/locationforecast/2.0/compact.json'
+
+tickets = [
+        {
+            'id': 12,
+            'summary': 'Ipsum Lorem minim fugiat deserunt velit voluptate et reprehenderit velit laboris Lorem eu laboris consectetur.',
+            'associated_locations': 2
+        },
+        {
+            'id': 1,
+            'summary': 'Ipsum Lorem minim fugiat deserunt velit voluptate et reprehenderit velit laboris Lorem eu laboris consectetur.',
+            'associated_locations': 1
+        }
+    ]
+
+def search_tickets(site_id='all'):
+    if site_id == 'all':
+        return tickets
+    else:
+        site_id = int(site_id)
+
+        # print(tickets)
+
+        for ticket in tickets:
+            if site_id == ticket['associated_locations']:
+                return ticket
+
+
 
 def search_site(site_id='all'):
     if site_id == 'all':
@@ -72,6 +99,16 @@ def site_status():
             
     
     return redirect(url_for("index"))
+
+@app.route('/site_report/__tickets', methods=['POST'])
+def __tickets():
+    incoming = request.get_json()
+
+    data = search_tickets(incoming['site_id'])
+    print(request.get_json())
+
+    time.sleep(2)
+    return jsonify(data)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
