@@ -1,7 +1,9 @@
 from waitress import serve
 import os
 
-from src import app
+from src import create_app
 
-if __name__ == '__main__':
-    serve(app, host='0.0.0.0', port=os.getenv('PORT', 5000))
+
+
+# if __name__ == '__main__':
+#     serve(app, host='0.0.0.0', port=os.getenv('PORT', 5000))
