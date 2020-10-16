@@ -3,17 +3,14 @@ import os, json, time
 import requests
 
 # Application factory pattern
-
 ROOT = os.path.abspath(os.curdir)
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY = os.urandom(16),
-        DATABASE = os.path.join(ROOT, 'data/warehouse.sqlite'),
+        DATABASE = os.path.join(ROOT, 'data/warehouse.db'),
     )
-
-    print(os.path.join(ROOT, 'data/warehouse.sqlite'))
 
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)
@@ -25,9 +22,17 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from .auth import bp
+    from .warehouse import bp
+    from .tower_status import bp
+
+    app.register_blueprint(auth.bp)
+    app.register_blueprint(warehouse.bp)
+    app.register_blueprint(tower_status.bp)
+
     @app.route('/')
-    def hello():
-        return 'hello world'
+    def index():
+        return redirect(url_for("tower_status.index"))
 
     return app
 
@@ -166,4 +171,4 @@ def create_app(test_config=None):
 
 # @app.route('/logout', methods=['POST'])
 # def logout():
-    print('logouts')
+    # print('logouts')

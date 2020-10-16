@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %}Planet Rebase LLC - Tower Status - {{
+    site }}{% endblock %} {% block content %}
+    <div class="container">
+      <div class="columns is-mobile">
+        <div class="column is-one-quarter">
+          <h1 class="title is-1" data-js="site_id">{{ site }}</h1>
+          <h2 class="subtitle is-1">{{ site }}</h2>
+        </div>
+      </div>
+      <div class="tabs is-centered">
+        <ul>
+          <li class="is-active"><a>Summary</a></li>
+          <li><a>Attributes</a></li>
+          <li><a>Tickets</a></li>
+          <li><a>Status</a></li>
+          <li><a>Metrics</a></li>
+        </ul>
+      </div>
+      <div class="columns is-mobile">
+        <div id="mapid"></div>
+      </div>
+      <div class="columns is-mobile">
+        <div class="column">
+          <h3>Address:</h3>
+          <ul>
+
+          </ul>
+        </div>
+        <div class="column">
+          <p>Weather Time: </p>
+          <p>
+            Weather Temp: C
+          </p>
+        </div>
+        <div class="column">
+          <button class="button" data-js="get_tickets_btn">Get Tickets</button>
+          <div class="tickets" data-js="ticket_table"></div>
+        </div>
+      </div>
+    </div>
+    {% endblock %} 
+    

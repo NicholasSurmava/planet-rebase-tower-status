@@ -57,7 +57,7 @@
                   </p>
                 </div>
                 <hr class="dropdown-divider" />
-                <a href="{{ url_for('logout') }}" class="dropdown-item">
+                <a href="{{ url_for('auth.logout') }}" class="dropdown-item">
                   Logout
                 </a>
               </div>
@@ -65,7 +65,7 @@
           </div>
           {% else %}
           <ul>
-            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
           </ul>
           {% endif %}
         </div>
